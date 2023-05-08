@@ -1,7 +1,8 @@
-import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
 import helmet from 'helmet';
 import { urlencoded } from 'express';
+import { AppModule } from './app.module';
+import { NestFactory } from '@nestjs/core';
+import { EnvironmentService } from './configs';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -12,6 +13,6 @@ async function bootstrap() {
 
   app.use(urlencoded({ extended: true }));
 
-  await app.listen(3000);
+  await app.listen(EnvironmentService.getValue('PORT'));
 }
 bootstrap();
