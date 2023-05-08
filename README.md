@@ -19,9 +19,10 @@ A simple application that allows you to stream large records from mysql and retu
 #### Installing 
 - Clone the repository. Run ```https://github.com/Youngprinnce/stream-large-records.git``` in your terminal
 - CD into the project folder
+- Change .ene.example to .env and add neccessary details
 - Launch the Xampp application
 - Click on the start button for Apache and MySQL
-- Click [here](http://localhost/phpmyadmin/index.php) to create database with name ```mfsafrica``` 
+- Click [here](http://localhost/phpmyadmin/index.php) to create database
 
 #### Open your terminal
 - Run `npm install` 
