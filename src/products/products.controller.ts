@@ -9,12 +9,18 @@ export class ProductController {
 
   @Get()
   async getAll(@Res() res: Response): Promise<void> {
-    const transformData = new MyTransform({ objectMode: true });
+    try {
+      const transformData = new MyTransform({ objectMode: true });
 
-    const productStream = await this.productsService.getProductsAsStream();
-    productStream.pipe(transformData);
+      const productStream = await this.productsService.getProductsAsStream();
+      productStream.pipe(transformData);
 
-    // Use the `write` method with the `end` option instead of manually calling `end` later
-    transformData.pipe(res, { end: true });
+      // Use the `write` method with the `end` option instead of manually calling `end` later
+      transformData.pipe(res, { end: true });
+    } catch (error) {
+      // Handle the error appropriately
+      console.error(error);
+      res.status(500).send('Internal Server Error');
+    }
   }
 }

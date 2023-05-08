@@ -6,15 +6,12 @@ import { Injectable, Inject } from '@nestjs/common';
 export class ProductsService {
   constructor(
     @Inject('PRODUCT_REPOSITORY')
-    private readonly productRepository: Repository<Product>, // Use `readonly` keyword to make `productRepository` immutable
+    private readonly productRepository: Repository<Product>,
   ) {}
 
   async getProductsAsStream(): Promise<NodeJS.ReadableStream> {
-    // Use TypeORM's query builder to create a stream of products
-    const stream = this.productRepository
-      .createQueryBuilder()
-      .select()
-      .stream();
+    const queryBuilder = this.productRepository.createQueryBuilder(); // Use TypeORM's query builder to create a stream of products
+    const stream = queryBuilder.stream();
     return stream;
   }
 }
